@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="post" action="{% url 'data' %}">
+    {% csrf_token %}
+    <label>Email</label>
+    <input type="email" name="email" placeholder="Enter E-mail">
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Enter Password  ">
+    <input type="submit" value="save">
+</form>
+<table border="5px">
+    <tr>
+        <th>Email</th>
+        <th>Password</th>
+        <th>action</th>
+    </tr>
+    {% for cus in cus_data %}
+    <tr>
+        <td>{{ cus.email }}</td>
+        <td>{{ cus.password }}</td>
+        <td><a href="{% url 'delete' cus.pk %}" onclick="return confirm('Are you sure?')">Delete</a> | <a href="{% url 'update' cus.pk %}" onclick="return confirm('Are you sure?')">Update</a><td>
+    </tr>
+    <br>
+    {% endfor %}
+</table>
+
+</body>
+</html>
